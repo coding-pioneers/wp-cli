@@ -557,10 +557,10 @@ class Runner {
 		}
 
 		// OpenShift rsh config.
-		if( 'openshift' === $bits['scheme'] ) {
+		if ( 'openshift' === $bits['scheme'] ) {
 			$command = 'oc rsh %s %s';
 
-			$escaped_command = sprintf( $command, escapeshellarg($bits['host']), $wp_command );
+			$escaped_command = sprintf( $command, escapeshellarg( $bits['host'] ), $wp_command );
 		}
 
 		// Default scheme is SSH.
