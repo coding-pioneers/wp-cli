@@ -1,6 +1,0 @@
-require:
-  - vendor/autoload.php
-@dev:
-  openshift: openshift:wpbedrock-application-1-lrmnd
-@dev2:
-   ssh: user@host:/asdasd/asd/asd
