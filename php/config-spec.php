@@ -25,6 +25,12 @@ return array(
 		'desc'    => 'Perform operation against a remote WordPress installation over HTTP.',
 	),
 
+	'openshift'         => array(
+		'runtime' => '=[<scheme>:]<host|container>',
+		'file'    => '[<scheme>:]<host|container>',
+		'desc'    => 'Perform operation against a remote server over OpenShift RSH.',
+	),
+
 	'blog'              => array(
 		'deprecated' => 'Use --url instead.',
 		'runtime'    => '=<url>',
