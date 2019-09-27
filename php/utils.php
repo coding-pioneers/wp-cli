@@ -900,7 +900,7 @@ function get_temp_dir() {
  * @return mixed
  */
 function parse_ssh_url( $url, $component = -1 ) {
-	preg_match( '#^((docker|docker\-compose|ssh|vagrant):)?(([^@:]+)@)?([^:/~]+)(:([\d]*))?((/|~)(.+))?$#', $url, $matches );
+	preg_match( '#^((docker|docker\-compose|ssh|vagrant|openshift):)?(([^@:]+)@)?([^:/~]+)(:([\d]*))?((/|~)(.+))?$#', $url, $matches );
 	$bits = array();
 	foreach ( array(
 		2 => 'scheme',
@@ -919,6 +919,12 @@ function parse_ssh_url( $url, $component = -1 ) {
 		if ( 'vagrant' === $bits['host'] && empty( $bits['scheme'] ) ) {
 			$bits['scheme'] = 'vagrant';
 			$bits['host']   = '';
+		}
+	}
+
+	if ( preg_match( '/^openshift:?/', $url ) ) {
+		if ( 'openshift' === $bits['host'] && empty( $bits['scheme'] ) ) {
+			$bits['scheme'] = 'openshift';
 		}
 	}
 

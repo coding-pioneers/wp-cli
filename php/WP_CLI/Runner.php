@@ -556,6 +556,13 @@ class Runner {
 			}
 		}
 
+		// OpenShift rsh config.
+		if( 'openshift' === $bits['scheme'] ) {
+			$command = 'oc rsh %s %s';
+
+			$escaped_command = sprintf( $command, escapeshellarg($bits['host']), $wp_command );
+		}
+
 		// Default scheme is SSH.
 		if ( 'ssh' === $bits['scheme'] || null === $bits['scheme'] ) {
 			$command = 'ssh -q %s %s %s';
@@ -1077,6 +1084,11 @@ class Runner {
 
 		if ( $this->config['ssh'] ) {
 			$this->run_ssh_command( $this->config['ssh'] );
+			return;
+		}
+
+		if ( $this->config['openshift'] ) {
+			$this->run_ssh_command( $this->config['openshift'] );
 			return;
 		}
 
