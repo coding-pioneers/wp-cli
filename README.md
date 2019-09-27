@@ -1,3 +1,20 @@
+WP-CLI OpenShift fork
+======
+This is a fork of WP-CLI that supports sending remote commands into deployed OpenShiftPods.
+
+## Requirements
+You need to have the OpenShift command line tool `oc` installed and you have to be logged into the cluster.
+
+## Configuration
+ To use this, add an alias to your `wp-cli.yml`, where the schema as well as the host are `openshift`, the argument behind the colon is the name of the deployed pod you want to run the commands in.
+
+```yaml
+require:
+  - vendor/autoload.php
+@dev:
+  openshift: openshift:<podname>    #e.g.: wpbedrock-application-1-lrmnd
+```
+
 WP-CLI
 ======
 

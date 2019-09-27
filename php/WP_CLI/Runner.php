@@ -414,7 +414,6 @@ class Runner {
 	 * @return void
 	 */
 	private function run_ssh_command( $connection_string ) {
-
 		WP_CLI::do_hook( 'before_ssh' );
 
 		$bits = Utils\parse_ssh_url( $connection_string );
@@ -444,7 +443,7 @@ class Runner {
 			array_shift( $wp_args );
 			$runtime_alias = array();
 			foreach ( $this->aliases[ $this->alias ] as $key => $value ) {
-				if ( 'ssh' === $key ) {
+				if ( 'ssh' === $key || 'openshift' === $key ) {
 					continue;
 				}
 				$runtime_alias[ $key ] = $value;
@@ -485,7 +484,6 @@ class Runner {
 	 */
 	private function generate_ssh_command( $bits, $wp_command ) {
 		$escaped_command = '';
-
 		// Set default values.
 		foreach ( array( 'scheme', 'user', 'host', 'port', 'path', 'key' ) as $bit ) {
 			if ( ! isset( $bits[ $bit ] ) ) {
@@ -558,8 +556,7 @@ class Runner {
 
 		// OpenShift rsh config.
 		if ( 'openshift' === $bits['scheme'] ) {
-			$command = 'oc rsh %s %s';
-
+			$command         = 'oc rsh %s %s';
 			$escaped_command = sprintf( $command, escapeshellarg( $bits['host'] ), $wp_command );
 		}
 
