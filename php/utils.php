@@ -925,6 +925,9 @@ function parse_ssh_url( $url, $component = -1 ) {
 	if ( preg_match( '/^openshift:?/', $url ) ) {
 		if ( 'openshift' === $bits['user'] && empty( $bits['scheme'] ) ) {
 			$bits['scheme'] = 'openshift';
+			if(isset($bits['path'])) {
+				$bits['path'] = substr($bits['path'], 1);
+			}
 		}
 	}
 

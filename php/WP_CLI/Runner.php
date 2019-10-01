@@ -427,7 +427,7 @@ class Runner {
 
 			$pre_cmd = rtrim( $pre_cmd, ';' ) . '; ';
 		}
-		if ( ! empty( $bits['path'] ) ) {
+		if ( ! empty( $bits['path'] ) && $bits['scheme'] !== 'openshift' ) {
 			$pre_cmd .= 'cd ' . escapeshellarg( $bits['path'] ) . '; ';
 		}
 
@@ -556,8 +556,13 @@ class Runner {
 
 		// OpenShift rsh config.
 		if ( 'openshift' === $bits['scheme'] ) {
-			$command         = 'oc rsh %s %s';
-			$escaped_command = sprintf( $command, escapeshellarg( $bits['host'] ), $wp_command );
+			if ( isset( $bits['path'] ) ) {
+				$command         = 'oc rsh -c %s %s %s';
+				$escaped_command = sprintf( $command, escapeshellarg( $bits['path'] ), escapeshellarg( $bits['host'] ), $wp_command );
+			} else {
+				$command         = 'oc rsh %s %s';
+				$escaped_command = sprintf( $command, escapeshellarg( $bits['host'] ), $wp_command );
+			}
 		}
 
 		// Default scheme is SSH.

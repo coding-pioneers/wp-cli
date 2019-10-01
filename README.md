@@ -12,7 +12,7 @@ You need to have the OpenShift command line tool `oc` installed and you have to 
 require:
   - vendor/autoload.php
 @dev:
-  openshift: openshift:<podname>    #e.g.: wpbedrock-application-1-lrmnd
+  openshift: openshift@<podname>:/<containername>    #e.g.: openshift@wpbedrock-application-1-lrmnd:/wpbedrock-php-container
 ```
 
 WP-CLI
